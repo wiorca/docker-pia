@@ -1,0 +1,17 @@
+#! /usr/bin/expect -f
+
+set timeout 20
+
+spawn piactl get connectionstate
+
+expect {
+    "Disconnected" { send_user "Health BAD\n"; exit 5 }
+    "Connecting" { send_user "Health BAD\n"; exit 5 }
+    "Interrupted" { send_user "Health BAD\n"; exit 5 }
+    "Reconnecting" { send_user "Health BAD\n"; exit 5 }
+    "DisconnectingToReconnect" { send_user "Health BAD\n"; exit 5 }
+    "Disconnecting" { send_user "Health BAD\n"; exit 5 }
+    "Connected" { send_user "Health OK\n"; exit 0 }
+    eof { send_user "Health BAD\n"; exit 5 }
+}
+
