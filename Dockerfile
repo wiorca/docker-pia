@@ -2,8 +2,16 @@
 # Based on Ubuntu 20.04 LTS
 FROM ubuntu:20.04
 
-# Version
+# Build arguments
+ARG BUILD_DATE
+ARG VCS_REF
 ARG VERSION=0.0.9
+
+# Labels
+LABEL com.wiorca.build-date=$BUILD_DATE \
+      com.wiorca.vcs-url="https://github.com/wiorca/docker-pia.git" \
+      com.wiorca.vcs-ref=$VCS_REF \
+      com.wiorca.schema-version=$VERSION
 
 # The volume for the docker_user home directory, and where configuration files should be stored.
 VOLUME [ "/config" ]
