@@ -5,7 +5,7 @@ FROM ubuntu:20.04
 # Build arguments
 ARG BUILD_DATE
 ARG VCS_REF
-ARG VERSION=0.0.9
+ARG VERSION=0.0.10
 
 # Labels
 LABEL com.wiorca.build-date=$BUILD_DATE \
@@ -48,8 +48,8 @@ RUN curl -L $( curl -s https://www.privateinternetaccess.com/installer/download_
     rm -rf /pia-installer /installer.bin /install.sh
 
 # Enable the health check for the VPN and app
-HEALTHCHECK --interval=5m --timeout=20s \
-  CMD /opt/scripts/vpn-health-check.sh || exit 1
+HEALTHCHECK --interval=5m --timeout=60s \
+  CMD /opt/scripts/health-check.sh || exit 1
 
 # Run the container
 CMD [ "/bin/bash", "/opt/scripts/vpn-startup.sh" ]

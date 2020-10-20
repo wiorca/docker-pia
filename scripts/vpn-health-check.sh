@@ -9,8 +9,6 @@ then
 	exit 1
 fi
 
-# Verify pia daemon is running
-
 PIAD=$(pgrep pia-wireguard-g | wc -l )
 if [[ ${PIAD} -ne 1 ]]
 then
@@ -22,7 +20,7 @@ then
 	fi
 fi
 
-# Verify windscribe service is happy
+# Verify the PIA service is happy
 
 /opt/scripts/vpn-health-check.expect
 
@@ -41,14 +39,6 @@ then
 fi
 
 echo "Network is up"
-
-# Check the app health
-
-/opt/scripts/app-health-check.sh
-
-if [ ! $? -eq 0 ]; then
-    exit 1;
-fi
 
 exit 0
 
