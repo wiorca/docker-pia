@@ -75,6 +75,7 @@ while [[ ! $? -eq 0 ]]; do
 done
 
 export VPN_PORT=$(piactl get portforward)
+echo "Port forward is $VPN_PORT"
 
 # Run the setup script for the environment
 /opt/scripts/app-setup.sh
